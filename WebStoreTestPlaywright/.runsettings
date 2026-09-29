@@ -2,7 +2,7 @@
     <TestRunParameters>
         <Parameter name="BaseUrl" value="https://www.webstaurantstore.com/" />
         <Parameter name="BrowserChannel" value="msedge" />
-		<Parameter name="Headless" value="false" />
+		<Parameter name="Headless" value="true" />
     </TestRunParameters>
 	<Playwright>
 		<BrowserName>chromium</BrowserName>
