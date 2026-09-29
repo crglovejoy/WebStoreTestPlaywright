@@ -19,7 +19,7 @@ namespace WebStoreTestPlaywright
 
         public static Boolean GetHeadlessBool()
         {
-            return Boolean.Parse(TestContext.Parameters.Get("Headless", "false"));
+            return Boolean.Parse(TestContext.Parameters.Get("Headless", "true"));
         }
     }
 }
