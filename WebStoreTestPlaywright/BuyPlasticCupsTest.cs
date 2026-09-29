@@ -69,10 +69,14 @@ namespace WebStoreTestPlaywright
                 await Expect(Page.GetByRole(AriaRole.Button, new() { Name = "Empty Cart" })).ToBeVisibleAsync();
                 await Page.WaitForTimeoutAsync(GetRandomThinkTime());
                 await Page.GetByRole(AriaRole.Button, new() { Name = "Empty Cart" }).ClickAsync();
-                await Expect(Page.GetByText("Are you sure you want to")).ToBeVisibleAsync();
-                await Expect(Page.GetByTestId("modal-footer").GetByText("Empty Cart")).ToBeVisibleAsync();
+                // Handle the modal that appears to confirm the intent to empty the cart.
+                await Expect(Page.Locator("header").Filter(new() { HasText = "Empty Cart" })).ToBeVisibleAsync();
+                await Page.GetByText("Are you sure you want to").ClickAsync();
+                await Expect(Page.GetByTestId("modal-footer")).ToBeVisibleAsync();
+                var modal = Page.GetByTestId("modal-footer");
                 await Page.WaitForTimeoutAsync(GetRandomThinkTime());
-                await Page.GetByTestId("modal-footer").GetByText("Empty Cart").ClickAsync();
+                await modal.GetByText("Empty Cart").ClickAsync();
+                await Expect(modal).ToBeHiddenAsync();
                 await Expect(Page.GetByText("Your cart is empty.")).ToBeVisibleAsync();
             }
             catch
